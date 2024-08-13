@@ -21,7 +21,7 @@ export default () =>
     },
     {
       local: configLocal,
-      pord: configProd,
+      prod: configProd,
       unittest: configUnittest,
     }[process.env.FM_SERVER_ENV](),
   );
