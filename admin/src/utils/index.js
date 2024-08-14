@@ -263,7 +263,7 @@ export function getTime(type) {
 export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result
 
-  const later = function() {
+  const later = function () {
     // 据上一次触发时间间隔
     const last = +new Date() - timestamp
 
@@ -280,7 +280,7 @@ export function debounce(func, wait, immediate) {
     }
   }
 
-  return function(...args) {
+  return function (...args) {
     context = this
     timestamp = +new Date()
     const callNow = immediate && !timeout
@@ -398,7 +398,7 @@ export function translateDataToTree(data) {
           parent.children && parent.children.length > 0
             ? parent.children.push(current)
             : // : delete parent.children
-              (parent.children = [current])
+            (parent.children = [current])
         }
       })
     })
@@ -448,7 +448,7 @@ export function listToObject(list) {
 export const baseApi = process.env.VUE_APP_BASE_API
 
 // 服务端 host 地址
-export const baseHost = process.env.VUE_APP_BASE_HOST
+export const baseHost = ''
 
 // 权限角色匹配
 export function roleName(name) {
