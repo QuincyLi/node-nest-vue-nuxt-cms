@@ -48,7 +48,7 @@ export default {
 
   http: {
     // debug: true,
-    baseURL: "" // Used as fallback if no runtime config is provided
+    baseURL: "http://8.152.162.158:3000/" // Used as fallback if no runtime config is provided
   },
 
   server: {
