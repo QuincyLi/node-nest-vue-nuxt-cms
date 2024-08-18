@@ -1,11 +1,6 @@
 <template>
   <div class="app-container" v-loading="loading">
-    <el-form
-      :model="formData"
-      :rules="rules"
-      ref="validateForm"
-      label-width="140px"
-    >
+    <el-form :model="formData" :rules="rules" ref="validateForm" label-width="140px">
       <el-form-item label="名称" prop="name">
         <el-input v-model="formData.name"></el-input>
       </el-form-item>
@@ -16,31 +11,15 @@
 
       <el-form-item label="分类" prop="category">
         <el-select v-model="formData.category" placeholder="请选择">
-          <el-option
-            v-for="item in categoryList"
-            :key="item.id"
-            :label="item.name"
-            :value="item.id"
-          >
+          <el-option v-for="item in categoryList" :key="item.id" :label="item.name" :value="item.id">
           </el-option>
         </el-select>
       </el-form-item>
 
       <el-form-item label="产品图片" prop="pic">
-        <el-upload
-          action="/api/upload"
-          list-type="picture-card"
-          name="upload"
-          :auto-upload="true"
-          :file-list="uploadFile.list"
-          :limit="uploadFile.limit"
-          :on-success="onUploadChange"
-          :on-remove="onRemoveChange"
-          :on-exceed="onUploadExceed"
-          drag
-          multiple
-          :headers="uploadHeaders"
-        >
+        <el-upload action="/api/upload" list-type="picture-card" name="upload" :auto-upload="true"
+          :file-list="uploadFile.list" :limit="uploadFile.limit" :on-success="onUploadChange"
+          :on-remove="onRemoveChange" :on-exceed="onUploadExceed" drag multiple :headers="uploadHeaders">
           <i slot="default" class="el-icon-plus"></i>
         </el-upload>
       </el-form-item>
@@ -60,18 +39,12 @@
       </el-form-item>
 
       <el-form-item label="详情" prop="content">
-        <ckeditor
-          :editor="editor"
-          v-model="formData.content"
-          :config="editorConfig"
-        >
+        <ckeditor :editor="editor" v-model="formData.content" :config="editorConfig">
         </ckeditor>
       </el-form-item>
     </el-form>
     <div class="fixed--footer">
-      <el-button type="primary" id="editor" @click="submitForm('validateForm')"
-        >提交</el-button
-      >
+      <el-button type="primary" id="editor" @click="submitForm('validateForm')">提交</el-button>
       <el-button @click="resetForm('validateForm')">重置</el-button>
     </div>
   </div>
@@ -258,15 +231,16 @@ export default {
 
     // 文件上传添加
     onUploadChange(res) {
-      this.formData.pic = res.path
+      this.formData.pic = res.url
     },
 
     // 文件移除
     onRemoveChange(file) {
-      let res = file.response || {}
+      // let res = file.response || {}
 
-      let index = this.formData.pic.indexOf(res.path)
-      this.formData.pic.splice(index, 1)
+      // let index = this.formData.pic.indexOf(res.path)
+      // this.formData.pic.splice(index, 1)
+      this.formData.pic = "";
     },
 
     // 超出文件

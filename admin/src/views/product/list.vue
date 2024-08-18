@@ -2,46 +2,20 @@
   <div class="app-container">
     <div class="filter-container">
       <div class="filter-container__search">
-        <el-input
-          v-model="listQuery.keyword"
-          clearable
-          placeholder="请输入内容"
-          @keyup.enter.native="onFilter"
-        >
-          <el-button
-            slot="append"
-            icon="el-icon-search"
-            type="primary"
-            @click="onFilter"
-            @keyup.enter.native="onFilter"
-            >搜索</el-button
-          >
+        <el-input v-model="listQuery.keyword" clearable placeholder="请输入内容" @keyup.enter.native="onFilter">
+          <el-button slot="append" icon="el-icon-search" type="primary" @click="onFilter"
+            @keyup.enter.native="onFilter">搜索</el-button>
         </el-input>
       </div>
       <div class="filter-container__ctrl">
-        <el-button
-          class="filter-item"
-          style="margin-left: 10px"
-          type="primary"
-          plain
-          icon="el-icon-edit"
-          @click="handleCreate"
-        >
+        <el-button class="filter-item" style="margin-left: 10px" type="primary" plain icon="el-icon-edit"
+          @click="handleCreate">
           {{ $t('table.add') }}
         </el-button>
       </div>
     </div>
-    <el-table
-      :key="tableKey"
-      v-loading="listLoading"
-      :data="list"
-      border
-      fit
-      highlight-current-row
-      stripe
-      @selection-change="handleSelectionChange"
-      id="tableList"
-    >
+    <el-table :key="tableKey" v-loading="listLoading" :data="list" border fit highlight-current-row stripe
+      @selection-change="handleSelectionChange" id="tableList">
       <el-table-column type="selection" width="55"></el-table-column>
 
       <el-table-column label="名称">
@@ -63,66 +37,37 @@
         </template>
       </el-table-column>
 
-      <el-table-column
-        sortable
-        prop="updatedAt"
-        :label="$t('table.updatedAt')"
-        align="center"
-      >
+      <el-table-column sortable prop="updatedAt" :label="$t('table.updatedAt')" align="center">
         <template slot-scope="{ row }">
           <span>{{ row.updatedAt | formatDate }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column
-        :label="$t('table.status')"
-        class-name="status-col"
-        width="100"
-      >
+      <el-table-column :label="$t('table.status')" class-name="status-col" width="100">
         <template slot-scope="{ row }">
           <el-tag :type="row.status | statusFilter" size="mini">
             {{ row.status ? '开启' : '停用' }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        :label="$t('table.actions')"
-        align="center"
-        class-name="small-padding fixed-width"
-      >
+      <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{ row }">
           <el-button size="mini" @click="handleUpdate(row)">
             {{ $t('table.edit') }}
           </el-button>
 
-          <el-button
-            v-if="row.status != 'deleted'"
-            size="mini"
-            type="danger"
-            plain
-            @click="handleDelete(row)"
-          >
+          <el-button v-if="row.status != 'deleted'" size="mini" type="danger" plain @click="handleDelete(row)">
             {{ $t('table.delete') }}
           </el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="el-table__footer">
-      <el-button
-        type="danger"
-        plain
-        :disabled="selectedRows.length <= 0"
-        @click="handleDelete(selectedRows)"
-        >删除选中
+      <el-button type="danger" plain :disabled="selectedRows.length <= 0" @click="handleDelete(selectedRows)">删除选中
       </el-button>
     </div>
-    <pagination
-      v-show="total > 0"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="getList"
-    />
+    <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
+      @pagination="getList" />
   </div>
 </template>
 
@@ -266,7 +211,7 @@ export default {
         .then(() => {
           done()
         })
-        .catch(() => {})
+        .catch(() => { })
     },
 
     // filter
