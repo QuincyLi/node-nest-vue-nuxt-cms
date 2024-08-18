@@ -13,13 +13,14 @@ import * as path from 'path';
 import { baseHosts } from '../libs/config';
 import { ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuardUser } from 'src/auth/guards/jwt-auth.guard';
-import Jimp from 'jimp';
-const jimp = require('jimp');
 import { Log } from 'src/libs/utils';
+import { join } from 'path';
+
+const jimp = require('jimp');
 
 const { NODE_ENV } = process.env;
 const baseHost = baseHosts[NODE_ENV] || {
-  uploadPath: 'public/',
+  uploadPath: join(__dirname, '../../'),
   baseHost: 'http://localhost:3000/',
   domain: 'www.giibee.com',
 };
@@ -32,7 +33,16 @@ export class UploadController {
     // see https://www.techiediaries.com/nestjs-upload-serve-static-file/
     FileInterceptor('upload', {
       storage: diskStorage({
-        destination: `./${baseHost.uploadPath}uploads/`,
+        destination: join(__dirname, '../../public/uploads'),
+        // destination: (req, file, cb) => {
+        //   const folderPath = join(__dirname, '../asstes');
+        //   console.log(folderPath);
+
+        //   if (!fs.existsSync(folderPath)) {
+        //     fs.mkdirSync(folderPath);
+        //   }
+        //   cb(null, folderPath);
+        // },
         filename: (_req, file, cb) => {
           file = file.upload ? file.upload : file;
           // console.log('fiel', file, _req)
@@ -65,7 +75,7 @@ export class UploadController {
     const { filename, path, mimetype } = upload;
     upload.uploaded = 1;
     // upload.url = path.replace('public/', 'http://localhost:3000/')
-    upload.url = path.replace(baseHost.uploadPath, baseHost.baseHost);
+    upload.url = path.replace(baseHost.uploadPath, '');
     upload.fileName = filename;
 
     if (mimetype.includes('image')) {
