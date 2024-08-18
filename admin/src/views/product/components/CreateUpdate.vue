@@ -231,7 +231,7 @@ export default {
 
     // 文件上传添加
     onUploadChange(res) {
-      this.formData.pic = res.path
+      this.formData.pic = res.url
     },
 
     // 文件移除
