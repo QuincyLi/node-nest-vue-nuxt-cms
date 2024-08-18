@@ -1,27 +1,13 @@
 <template>
   <div class="app-container" v-loading="loading">
-    <el-form
-      :model="formData"
-      :rules="rules"
-      ref="validateForm"
-      label-width="140px"
-    >
+    <el-form :model="formData" :rules="rules" ref="validateForm" label-width="140px">
       <el-form-item label="标题" prop="name">
         <el-input v-model="formData.name"></el-input>
       </el-form-item>
 
       <el-form-item label="图片" prop="pic">
-        <el-upload
-          action="/api/upload"
-          list-type="picture-card"
-          :auto-upload="true"
-          :file-list="uploadFile.list"
-          name="upload"
-          drag
-          :limit="uploadFile.limit"
-          :on-success="onUploadChange"
-          :on-exceed="onUploadExceed"
-        >
+        <el-upload action="/api/upload" list-type="picture-card" :auto-upload="true" :file-list="uploadFile.list"
+          name="upload" drag :limit="uploadFile.limit" :on-success="onUploadChange" :on-exceed="onUploadExceed">
           <i slot="default" class="el-icon-plus"></i>
         </el-upload>
       </el-form-item>
@@ -36,12 +22,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button
-          type="primary"
-          id="editor"
-          @click="submitForm('validateForm')"
-          >提交</el-button
-        >
+        <el-button type="primary" id="editor" @click="submitForm('validateForm')">提交</el-button>
         <el-button @click="resetForm('validateForm')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -152,7 +133,7 @@ export default {
 
     // 文件上传添加
     onUploadChange(res) {
-      this.formData.pic = res.path
+      this.formData.pic = res.url
     },
 
     // 超出文件
