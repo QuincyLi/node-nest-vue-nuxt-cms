@@ -1,3 +1,3 @@
 export const state = () => ({
-  staticHost: "http://localhost:3000/"
+  staticHost: "http://8.152.162.158:3000/"
 });
