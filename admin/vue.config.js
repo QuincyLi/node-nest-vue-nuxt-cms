@@ -43,6 +43,12 @@ module.exports = {
           // '^/api': '/'
         },
       },
+      '/upload': {
+        target: process.env.VUE_APP_BASE_HOST,
+        pathRewrite: {
+          // '^/upload': '/upload',
+        },
+      },
     },
     // before: require('./mock/mock-server.js')
   },
